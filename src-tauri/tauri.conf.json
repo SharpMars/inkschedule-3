@@ -1,0 +1,53 @@
+{
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "InkSchedule 3",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": false
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.sharpmars.inkschedule-3",
+      "icon": [
+        "icons/icon_32x32.png",
+        "icons/icon.png",
+        "icons/icon.ico"
+      ]
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "title": "InkSchedule 3",
+        "resizable": false,
+        "width": 450,
+        "height": 600,
+        "decorations": false,
+        "visible": false,
+        "transparent": true,
+        "userAgent": "SharpMars-InkSchedule3/0.1.0"
+      }
+    ],
+    "systemTray": {
+      "title": "InkSchedule 3",
+      "iconPath": "icons/icon_32x32.png",
+      "iconAsTemplate": false,
+      "menuOnLeftClick": false
+    }
+  }
+}

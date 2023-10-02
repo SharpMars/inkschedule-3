@@ -1,0 +1,25 @@
+{
+  "name": "inkschedule-3",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "tauri": "tauri"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@tauri-apps/api": "^1.4.0",
+    "solid-js": "^1.7.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.4.0",
+    "@types/node": "^18.7.10",
+    "prettier": "3.0.3",
+    "typescript": "^4.9.5",
+    "unocss": "^0.56.4",
+    "vite": "^4.2.1",
+    "vite-plugin-solid": "^2.5.0"
+  }
+}

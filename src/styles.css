@@ -1,0 +1,31 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #fafafa;
+  background-color: #212121;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+div::-webkit-scrollbar {
+  width: 4px;
+  background-color: #424242;
+  border-radius: 0.25rem;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 0.25rem;
+}
