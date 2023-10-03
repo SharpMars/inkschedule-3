@@ -19,19 +19,19 @@ In cases there are any bugs or missing features and it hasn't been issue made fo
 To build the app you need Tauri set up with [pnpm](https://pnpm.io/) and [Rust](https://tauri.app/v1/guides/getting-started/prerequisites).
 
 ### Install dependencies
-`
+```
 pnpm install
-`
+```
 
 ### Run dev
-`
+```
 pnpm tauri dev
-`
+```
 
 ### Release build
-`
+```
 pnpm tauri build
-`
+```
 
 Before committing make sure your code is formatted.
 
