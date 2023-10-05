@@ -9,7 +9,7 @@
 ## About
 Small [Tauri](https://tauri.app/) app that shows current Splatoon 3 map schedule in your taskbar. Uses [splatoon3.ink](https://splatoon3.ink) API to get current schedule data.
 
-In cases there are any bugs or missing features and it hasn't been issue made for it yet, make one if you can. Pull requests are welcome.
+In cases there are any bugs or missing features and there hasn't been an issue made for them yet, make one if you can. Pull requests are welcome.
 
 <p align=center>
 <img alt="App preview" src=".github/preview.webp">
@@ -19,19 +19,19 @@ In cases there are any bugs or missing features and it hasn't been issue made fo
 To build the app you need Tauri set up with [pnpm](https://pnpm.io/) and [Rust](https://tauri.app/v1/guides/getting-started/prerequisites).
 
 ### Install dependencies
-`
+```
 pnpm install
-`
+```
 
 ### Run dev
-`
+```
 pnpm tauri dev
-`
+```
 
 ### Release build
-`
+```
 pnpm tauri build
-`
+```
 
 Before committing make sure your code is formatted.
 
