@@ -1,10 +1,9 @@
 import { For, Match, Suspense, Switch, createResource, createSignal } from "solid-js";
-import { Navbar } from "./Navbar";
+import { Navbar, Tab } from "./Navbar";
 import { AnarchyEntry } from "./entries/AnarchyEntry";
 import { RegularEntry } from "./entries/RegularEntry";
 import { SalmonEntry } from "./entries/SalmonEntry";
 import { XEntry } from "./entries/XEntry";
-import { Tab } from "./tabs";
 import { getCurrentSchedule } from "./schedule";
 
 function App() {

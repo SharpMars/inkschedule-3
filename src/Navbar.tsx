@@ -1,5 +1,6 @@
 import { Setter } from "solid-js";
-import { Tab } from "./tabs";
+
+export type Tab = "Regular" | "Anarchy" | "X" | "Salmon" | "Fest";
 
 interface NavbarProps {
   setTab: Setter<Tab>;
