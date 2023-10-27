@@ -1,4 +1,4 @@
-import { Accessor, For, Match, Switch } from "solid-js";
+import { Accessor, For, Match, Show, Switch } from "solid-js";
 import { RegularEntry } from "./RegularEntry";
 import { AnarchyEntry } from "./AnarchyEntry";
 import { SalmonEntry } from "./SalmonEntry";
@@ -17,69 +17,75 @@ export function EntryList(props: EntryListProps) {
         <Match when={props.getTab() === "Regular"}>
           <For each={props.getSchedule()?.data.regularSchedules.nodes}>
             {(node) => (
-              <RegularEntry
-                startTime={new Date(Date.parse(node.startTime))}
-                endTime={new Date(Date.parse(node.endTime))}
-                stage1={{
-                  name: node.regularMatchSetting.vsStages[0].name,
-                  thumbnail: node.regularMatchSetting.vsStages[0].image.url
-                }}
-                stage2={{
-                  name: node.regularMatchSetting.vsStages[1].name,
-                  thumbnail: node.regularMatchSetting.vsStages[1].image.url
-                }}
-              />
+              <Show when={node.regularMatchSetting !== null}>
+                <RegularEntry
+                  startTime={new Date(Date.parse(node.startTime))}
+                  endTime={new Date(Date.parse(node.endTime))}
+                  stage1={{
+                    name: node.regularMatchSetting.vsStages[0].name,
+                    thumbnail: node.regularMatchSetting.vsStages[0].image.url
+                  }}
+                  stage2={{
+                    name: node.regularMatchSetting.vsStages[1].name,
+                    thumbnail: node.regularMatchSetting.vsStages[1].image.url
+                  }}
+                />
+              </Show>
             )}
           </For>
         </Match>
         <Match when={props.getTab() === "Anarchy"}>
           <For each={props.getSchedule()?.data.bankaraSchedules.nodes}>
             {(node) => (
-              <AnarchyEntry
-                startTime={new Date(Date.parse(node.startTime))}
-                endTime={new Date(Date.parse(node.endTime))}
-                seriesMatch={{
-                  mode: node.bankaraMatchSettings[0].vsRule.rule,
-                  stage1: {
-                    name: node.bankaraMatchSettings[0].vsStages[0].name,
-                    thumbnail: node.bankaraMatchSettings[0].vsStages[0].image.url
-                  },
-                  stage2: {
-                    name: node.bankaraMatchSettings[0].vsStages[1].name,
-                    thumbnail: node.bankaraMatchSettings[0].vsStages[1].image.url
-                  }
-                }}
-                openMatch={{
-                  mode: node.bankaraMatchSettings[1].vsRule.rule,
-                  stage1: {
-                    name: node.bankaraMatchSettings[1].vsStages[0].name,
-                    thumbnail: node.bankaraMatchSettings[1].vsStages[0].image.url
-                  },
-                  stage2: {
-                    name: node.bankaraMatchSettings[1].vsStages[1].name,
-                    thumbnail: node.bankaraMatchSettings[1].vsStages[1].image.url
-                  }
-                }}
-              />
+              <Show when={node.bankaraMatchSettings !== null}>
+                <AnarchyEntry
+                  startTime={new Date(Date.parse(node.startTime))}
+                  endTime={new Date(Date.parse(node.endTime))}
+                  seriesMatch={{
+                    mode: node.bankaraMatchSettings[0].vsRule.rule,
+                    stage1: {
+                      name: node.bankaraMatchSettings[0].vsStages[0].name,
+                      thumbnail: node.bankaraMatchSettings[0].vsStages[0].image.url
+                    },
+                    stage2: {
+                      name: node.bankaraMatchSettings[0].vsStages[1].name,
+                      thumbnail: node.bankaraMatchSettings[0].vsStages[1].image.url
+                    }
+                  }}
+                  openMatch={{
+                    mode: node.bankaraMatchSettings[1].vsRule.rule,
+                    stage1: {
+                      name: node.bankaraMatchSettings[1].vsStages[0].name,
+                      thumbnail: node.bankaraMatchSettings[1].vsStages[0].image.url
+                    },
+                    stage2: {
+                      name: node.bankaraMatchSettings[1].vsStages[1].name,
+                      thumbnail: node.bankaraMatchSettings[1].vsStages[1].image.url
+                    }
+                  }}
+                />
+              </Show>
             )}
           </For>
         </Match>
         <Match when={props.getTab() === "X"}>
           <For each={props.getSchedule()?.data.xSchedules.nodes}>
             {(node) => (
-              <XEntry
-                startTime={new Date(Date.parse(node.startTime))}
-                endTime={new Date(Date.parse(node.endTime))}
-                stage1={{
-                  name: node.xMatchSetting.vsStages[0].name,
-                  thumbnail: node.xMatchSetting.vsStages[0].image.url
-                }}
-                stage2={{
-                  name: node.xMatchSetting.vsStages[1].name,
-                  thumbnail: node.xMatchSetting.vsStages[1].image.url
-                }}
-                mode={node.xMatchSetting.vsRule.rule}
-              />
+              <Show when={node.xMatchSetting !== null}>
+                <XEntry
+                  startTime={new Date(Date.parse(node.startTime))}
+                  endTime={new Date(Date.parse(node.endTime))}
+                  stage1={{
+                    name: node.xMatchSetting.vsStages[0].name,
+                    thumbnail: node.xMatchSetting.vsStages[0].image.url
+                  }}
+                  stage2={{
+                    name: node.xMatchSetting.vsStages[1].name,
+                    thumbnail: node.xMatchSetting.vsStages[1].image.url
+                  }}
+                  mode={node.xMatchSetting.vsRule.rule}
+                />
+              </Show>
             )}
           </For>
         </Match>
