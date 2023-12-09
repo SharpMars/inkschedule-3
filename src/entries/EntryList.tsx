@@ -95,7 +95,7 @@ export function EntryList(props: EntryListProps) {
               <SalmonEntry
                 startTime={new Date(Date.parse(node.startTime))}
                 endTime={new Date(Date.parse(node.endTime))}
-                kingSalmonid={node.__splatoon3ink_king_salmonid_guess}
+                kingSalmonid={node.setting.boss.name}
                 stage={{
                   name: node.setting.coopStage.name,
                   thumbnail: node.setting.coopStage.thumbnailImage.url
