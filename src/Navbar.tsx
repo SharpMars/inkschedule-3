@@ -1,9 +1,10 @@
-import { Setter } from "solid-js";
+import { Accessor, Setter } from "solid-js";
 
-export type Tab = "Regular" | "Anarchy" | "X" | "Salmon" | "Fest";
+export type Tab = "Regular" | "Anarchy" | "X" | "Salmon" | "Fest" | "Challenges";
 
 interface NavbarProps {
   setTab: Setter<Tab>;
+  getSchedule: Accessor<any>;
 }
 
 export function Navbar(props: NavbarProps) {
@@ -45,6 +46,17 @@ export function Navbar(props: NavbarProps) {
       >
         <img class="aspect-square h-100%" src="/Icon_Mr_Grizz.png" />
       </button>
+      {props.getSchedule()?.data.eventSchedules.nodes.length > 0 && (
+        <button
+          aria-label="Salmon Run"
+          class="bg-pink-600 b-0 b-rounded flex-1 hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
+          onClick={() => {
+            props.setTab("Challenges");
+          }}
+        >
+          <img class="aspect-square h-100%" src="/Challenges.png" />
+        </button>
+      )}
     </nav>
   );
 }

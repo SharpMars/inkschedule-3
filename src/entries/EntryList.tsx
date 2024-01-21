@@ -4,6 +4,7 @@ import { AnarchyEntry } from "./AnarchyEntry";
 import { SalmonEntry } from "./SalmonEntry";
 import { Tab } from "../Navbar";
 import { XEntry } from "./XEntry";
+import { ChallengeEntry } from "./ChallengeEntry";
 
 interface EntryListProps {
   getTab: Accessor<Tab>;
@@ -117,6 +118,26 @@ export function EntryList(props: EntryListProps) {
                   name: node.setting.weapons[3].name,
                   image: node.setting.weapons[3].image.url
                 }}
+              />
+            )}
+          </For>
+        </Match>
+        <Match when={props.getTab() === "Challenges"}>
+          <For each={props.getSchedule()?.data.eventSchedules.nodes}>
+            {(node) => (
+              <ChallengeEntry
+                name={node.leagueMatchSetting.leagueMatchEvent.name}
+                description={node.leagueMatchSetting.leagueMatchEvent.desc.replace("<br />", "\n")}
+                timePeriods={node.timePeriods}
+                stage1={{
+                  name: node.leagueMatchSetting.vsStages[0].name,
+                  thumbnail: node.leagueMatchSetting.vsStages[0].image.url
+                }}
+                stage2={{
+                  name: node.leagueMatchSetting.vsStages[1].name,
+                  thumbnail: node.leagueMatchSetting.vsStages[1].image.url
+                }}
+                mode={node.leagueMatchSetting.vsRule.rule}
               />
             )}
           </For>
