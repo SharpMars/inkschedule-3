@@ -45,7 +45,7 @@ function App() {
       )}
     >
       <Navbar setTab={setTab} getSchedule={getSchedule}></Navbar>
-      <Suspense fallback={<p class="text-center font-bold">Loading...</p>}>
+      <Suspense fallback={<p class="text-center font-bold h-[calc(100vh-46px)]">Loading...</p>}>
         <EntryList getTab={getTab} getSchedule={getSchedule}></EntryList>
       </Suspense>
     </ErrorBoundary>
