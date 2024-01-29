@@ -26,13 +26,18 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
     refetch();
   }, 6000);
 
+  const titleSize = (23 / props.name.length) * 180;
+
   return (
     <div class="bg-neutral-7 rounded m-t-1 m-b-1 p-2">
-      <div class="flex content-center gap-1">
+      <div class="flex gap-1">
         <img class="aspect-square w-12" src={getImgFromMode(props.mode)}></img>
-        <p class="font-bold font-size-7 m-0 shadow-black text-shadow-[2px_2px_var(--un-shadow-color)] self-center">
+        <span
+          class="font-bold shadow-black text-shadow-[2px_2px_var(--un-shadow-color)] text-nowrap self-center"
+          style={{ "font-size": `min(175%, ${titleSize}%)` }}
+        >
           {props.name}
-        </p>
+        </span>
       </div>
       <p class="whitespace-pre m-t-2 font-light">{props.description}</p>
       <div class="grid grid-cols-2 gap-1 m-b-2">
