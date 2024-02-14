@@ -50,6 +50,18 @@
       "iconPath": "icons/32x32.png",
       "iconAsTemplate": false,
       "menuOnLeftClick": false
+    },
+    "updater": {
+      "active": true,
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIxMTI3QjVCRDY3QzRGMDkKUldRSlQzeldXM3NTSVIxT0xDcDNPMjRhTlRGcGF4NCtLU2NqMWpkNTJZSVhHY0ZaamZDUGo5eksK",
+      "windows": {
+        "installMode": "passive",
+        "installerArgs": []
+      },
+      "endpoints": [
+        "https://gist.githubusercontent.com/SharpMars/ea7a3cf1379bf3332c8d6e5c8db6f2d9/raw/6e603fcd5d798cd891426a49a9339f6135ab5b58/updater.json"
+      ]
     }
   }
 }
