@@ -1,6 +1,5 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-
 use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayMenu};
 use tauri_plugin_autostart::ManagerExt;
 use tauri_plugin_positioner::{Position, WindowExt};
@@ -32,7 +31,10 @@ fn main() {
                     let window = app.get_window("main").unwrap();
                     let _ = window.move_window(Position::TrayCenter);
                     let mut position = window.outer_position().unwrap();
-                    let top_right_pos = position.x + 450;
+
+                    let window_width: i32 = window.outer_size().unwrap().width.try_into().unwrap();
+
+                    let top_right_pos = position.x + window_width;
                     let monitor_size_width: i32 = window
                         .current_monitor()
                         .unwrap()
