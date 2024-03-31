@@ -26,7 +26,7 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
     refetch();
   }, 6000);
 
-  const titleSize = (23 / props.name.length) * 180;
+  const titleSize = (22 / props.name.length) * 180;
 
   return (
     <div class="bg-neutral-7 rounded m-t-1 m-b-1 p-2">
