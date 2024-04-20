@@ -43,6 +43,17 @@ export function Navbar(props: NavbarProps) {
           <img class="aspect-square h-100%" src="/XBattleLogo.png" />
         </button>
       )}
+      {props.getSchedule()?.data.festSchedules.nodes.length > 0 && (
+        <button
+          aria-label="Splatfest"
+          class="bg-[#FFFF00] b-0 b-rounded flex-1 hover:filter-brightness-90% active:filter-brightness-70% transition-filter p-0.5"
+          onClick={() => {
+            props.setTab("Fest");
+          }}
+        >
+          <img class="aspect-square h-100%" src="/Splatfest.svg" />
+        </button>
+      )}
       {props.getSchedule()?.data.eventSchedules.nodes.length > 0 && (
         <button
           aria-label="Challenges"
