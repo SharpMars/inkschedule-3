@@ -27,6 +27,17 @@ function App() {
     if (getTab() == "Challenges" && getSchedule()?.data.eventSchedules.nodes == 0) {
       setTab("Regular");
     }
+
+    if (getTab() == "Fest" && getSchedule()?.data.festSchedules.nodes == 0) {
+      setTab("Regular");
+    }
+
+    if (
+      ["Regular", "Anarchy", "X"].some((element) => element == getTab()) &&
+      getSchedule()?.data.regularSchedules.nodes == 0
+    ) {
+      setTab("Fest");
+    }
   }, getSchedule);
 
   return (
