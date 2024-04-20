@@ -29,7 +29,7 @@ export function SalmonEntry(props: SalmonEntryProps) {
             <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
               {props.stage.name}
             </p>
-            <p class="absolute m-0 top-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 whitespace-nowrap font-bold left-0 rounded-lb-0">
+            <p class="absolute m-0 top-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 whitespace-nowrap font-bold left-0 rounded-lb-0 rounded-rt-0">
               {props.kingSalmonid}
             </p>
           </div>
