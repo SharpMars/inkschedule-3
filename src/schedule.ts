@@ -25,6 +25,19 @@ async function fetchNewSchedule() {
     expires: date,
     data: res.data
   };
+
+  newSchedule.data.regularSchedules.nodes = newSchedule.data.regularSchedules.nodes.filter((node: any) => {
+    node.regularMatchSetting != null;
+  });
+
+  newSchedule.data.bankaraSchedules.nodes = newSchedule.data.bankaraSchedules.nodes.filter((node: any) => {
+    node.bankaraMatchSettings != null;
+  });
+
+  newSchedule.data.xSchedules.nodes = newSchedule.data.xSchedules.nodes.filter((node: any) => {
+    node.xMatchSetting != null;
+  });
+
   localStorage.setItem("schedule", JSON.stringify(newSchedule));
   return newSchedule;
 }
