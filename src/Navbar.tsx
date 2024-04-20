@@ -48,7 +48,7 @@ export function Navbar(props: NavbarProps) {
       </button>
       {props.getSchedule()?.data.eventSchedules.nodes.length > 0 && (
         <button
-          aria-label="Salmon Run"
+          aria-label="Challenges"
           class="bg-pink-600 b-0 b-rounded flex-1 hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
           onClick={() => {
             props.setTab("Challenges");
