@@ -37,15 +37,6 @@ export function Navbar(props: NavbarProps) {
       >
         <img class="aspect-square h-100%" src="/XBattleLogo.png" />
       </button>
-      <button
-        aria-label="Salmon Run"
-        class="bg-orange-600 b-0 b-rounded flex-1 hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
-        onClick={() => {
-          props.setTab("Salmon");
-        }}
-      >
-        <img class="aspect-square h-100%" src="/Icon_Mr_Grizz.png" />
-      </button>
       {props.getSchedule()?.data.eventSchedules.nodes.length > 0 && (
         <button
           aria-label="Challenges"
@@ -57,6 +48,15 @@ export function Navbar(props: NavbarProps) {
           <img class="aspect-square h-100%" src="/Challenges.png" />
         </button>
       )}
+      <button
+        aria-label="Salmon Run"
+        class="bg-orange-600 b-0 b-rounded flex-1 hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
+        onClick={() => {
+          props.setTab("Salmon");
+        }}
+      >
+        <img class="aspect-square h-100%" src="/Icon_Mr_Grizz.png" />
+      </button>
     </nav>
   );
 }
