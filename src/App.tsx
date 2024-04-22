@@ -24,17 +24,17 @@ function App() {
   }, 3000);
 
   createEffect(() => {
-    if (getTab() == "Challenges" && getSchedule()?.data.eventSchedules.nodes == 0) {
+    if (getTab() == "Challenges" && getSchedule()?.data.eventSchedules.nodes.length == 0) {
       setTab("Regular");
     }
 
-    if (getTab() == "Fest" && getSchedule()?.data.festSchedules.nodes == 0) {
+    if (getTab() == "Fest" && getSchedule()?.data.festSchedules.nodes.length == 0) {
       setTab("Regular");
     }
 
     if (
       ["Regular", "Anarchy", "X"].some((element) => element == getTab()) &&
-      getSchedule()?.data.regularSchedules.nodes == 0
+      getSchedule()?.data.regularSchedules.nodes.length == 0
     ) {
       setTab("Fest");
     }

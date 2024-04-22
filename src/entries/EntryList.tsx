@@ -145,44 +145,46 @@ export function EntryList(props: EntryListProps) {
           </For>
         </Match>
         <Match when={props.getTab() === "Fest"}>
-          <TriColorEntry
-            startTime={props.getSchedule()?.data.currentFest.midtermTime}
-            endTime={props.getSchedule()?.data.currentFest.endTime}
-            stage={{
-              name: props.getSchedule()?.data.currentFest.tricolorStage.name,
-              thumbnail: props.getSchedule()?.data.currentFest.tricolorStage.image.url
-            }}
-          />
-          <For each={props.getSchedule()?.data.festSchedules.nodes}>
-            {(node) => (
-              <Show when={node.festMatchSettings !== null}>
-                <FestEntry
-                  startTime={new Date(Date.parse(node.startTime))}
-                  endTime={new Date(Date.parse(node.endTime))}
-                  openMatch={{
-                    stage1: {
-                      name: node.festMatchSettings[1].vsStages[0].name,
-                      thumbnail: node.festMatchSettings[1].vsStages[0].image.url
-                    },
-                    stage2: {
-                      name: node.festMatchSettings[1].vsStages[1].name,
-                      thumbnail: node.festMatchSettings[1].vsStages[1].image.url
-                    }
-                  }}
-                  proMatch={{
-                    stage1: {
-                      name: node.festMatchSettings[0].vsStages[0].name,
-                      thumbnail: node.festMatchSettings[0].vsStages[0].image.url
-                    },
-                    stage2: {
-                      name: node.festMatchSettings[0].vsStages[1].name,
-                      thumbnail: node.festMatchSettings[0].vsStages[1].image.url
-                    }
-                  }}
-                />
-              </Show>
-            )}
-          </For>
+          <Show when={props.getSchedule()?.data.currentFest !== null}>
+            <TriColorEntry
+              startTime={props.getSchedule()?.data.currentFest.midtermTime}
+              endTime={props.getSchedule()?.data.currentFest.endTime}
+              stage={{
+                name: props.getSchedule()?.data.currentFest.tricolorStage.name,
+                thumbnail: props.getSchedule()?.data.currentFest.tricolorStage.image.url
+              }}
+            />
+            <For each={props.getSchedule()?.data.festSchedules.nodes}>
+              {(node) => (
+                <Show when={node.festMatchSettings !== null}>
+                  <FestEntry
+                    startTime={new Date(Date.parse(node.startTime))}
+                    endTime={new Date(Date.parse(node.endTime))}
+                    openMatch={{
+                      stage1: {
+                        name: node.festMatchSettings[1].vsStages[0].name,
+                        thumbnail: node.festMatchSettings[1].vsStages[0].image.url
+                      },
+                      stage2: {
+                        name: node.festMatchSettings[1].vsStages[1].name,
+                        thumbnail: node.festMatchSettings[1].vsStages[1].image.url
+                      }
+                    }}
+                    proMatch={{
+                      stage1: {
+                        name: node.festMatchSettings[0].vsStages[0].name,
+                        thumbnail: node.festMatchSettings[0].vsStages[0].image.url
+                      },
+                      stage2: {
+                        name: node.festMatchSettings[0].vsStages[1].name,
+                        thumbnail: node.festMatchSettings[0].vsStages[1].image.url
+                      }
+                    }}
+                  />
+                </Show>
+              )}
+            </For>
+          </Show>
         </Match>
       </Switch>
     </div>

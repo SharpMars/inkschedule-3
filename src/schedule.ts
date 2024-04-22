@@ -27,15 +27,19 @@ async function fetchNewSchedule() {
   };
 
   newSchedule.data.regularSchedules.nodes = newSchedule.data.regularSchedules.nodes.filter((node: any) => {
-    node.regularMatchSetting != null;
+    return node.regularMatchSetting != null;
   });
 
   newSchedule.data.bankaraSchedules.nodes = newSchedule.data.bankaraSchedules.nodes.filter((node: any) => {
-    node.bankaraMatchSettings != null;
+    return node.bankaraMatchSettings != null;
   });
 
   newSchedule.data.xSchedules.nodes = newSchedule.data.xSchedules.nodes.filter((node: any) => {
-    node.xMatchSetting != null;
+    return node.xMatchSetting != null;
+  });
+
+  newSchedule.data.festSchedules.nodes = newSchedule.data.festSchedules.nodes.filter((node: any) => {
+    return node.festMatchSetting != null;
   });
 
   localStorage.setItem("schedule", JSON.stringify(newSchedule));
