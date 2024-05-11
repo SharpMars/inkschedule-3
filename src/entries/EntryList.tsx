@@ -7,6 +7,7 @@ import { XEntry } from "./XEntry";
 import { ChallengeEntry } from "./ChallengeEntry";
 import { FestEntry } from "./FestEntry";
 import { TriColorEntry } from "./TriColorEntry";
+import { EggstraEntry } from "./EggstraEntry";
 
 interface EntryListProps {
   getTab: Accessor<Tab>;
@@ -94,33 +95,64 @@ export function EntryList(props: EntryListProps) {
           </For>
         </Match>
         <Match when={props.getTab() === "Salmon"}>
-          <For each={props.getSchedule()?.data.coopGroupingSchedule.regularSchedules.nodes}>
+          <For each={props.getSchedule()?.data.coopGroupingSchedule.combinedSchedules.nodes}>
             {(node) => (
-              <SalmonEntry
-                startTime={new Date(Date.parse(node.startTime))}
-                endTime={new Date(Date.parse(node.endTime))}
-                kingSalmonid={node.setting.boss.name}
-                stage={{
-                  name: node.setting.coopStage.name,
-                  thumbnail: node.setting.coopStage.thumbnailImage.url
-                }}
-                weapon1={{
-                  name: node.setting.weapons[0].name,
-                  image: node.setting.weapons[0].image.url
-                }}
-                weapon2={{
-                  name: node.setting.weapons[1].name,
-                  image: node.setting.weapons[1].image.url
-                }}
-                weapon3={{
-                  name: node.setting.weapons[2].name,
-                  image: node.setting.weapons[2].image.url
-                }}
-                weapon4={{
-                  name: node.setting.weapons[3].name,
-                  image: node.setting.weapons[3].image.url
-                }}
-              />
+              <Switch
+                fallback={
+                  <SalmonEntry
+                    startTime={new Date(Date.parse(node.startTime))}
+                    endTime={new Date(Date.parse(node.endTime))}
+                    kingSalmonid={node.setting.boss.name}
+                    stage={{
+                      name: node.setting.coopStage.name,
+                      thumbnail: node.setting.coopStage.thumbnailImage.url
+                    }}
+                    weapon1={{
+                      name: node.setting.weapons[0].name,
+                      image: node.setting.weapons[0].image.url
+                    }}
+                    weapon2={{
+                      name: node.setting.weapons[1].name,
+                      image: node.setting.weapons[1].image.url
+                    }}
+                    weapon3={{
+                      name: node.setting.weapons[2].name,
+                      image: node.setting.weapons[2].image.url
+                    }}
+                    weapon4={{
+                      name: node.setting.weapons[3].name,
+                      image: node.setting.weapons[3].image.url
+                    }}
+                  />
+                }
+              >
+                <Match when={node.setting.rule != undefined}>
+                  <EggstraEntry
+                    startTime={new Date(Date.parse(node.startTime))}
+                    endTime={new Date(Date.parse(node.endTime))}
+                    stage={{
+                      name: node.setting.coopStage.name,
+                      thumbnail: node.setting.coopStage.thumbnailImage.url
+                    }}
+                    weapon1={{
+                      name: node.setting.weapons[0].name,
+                      image: node.setting.weapons[0].image.url
+                    }}
+                    weapon2={{
+                      name: node.setting.weapons[1].name,
+                      image: node.setting.weapons[1].image.url
+                    }}
+                    weapon3={{
+                      name: node.setting.weapons[2].name,
+                      image: node.setting.weapons[2].image.url
+                    }}
+                    weapon4={{
+                      name: node.setting.weapons[3].name,
+                      image: node.setting.weapons[3].image.url
+                    }}
+                  ></EggstraEntry>
+                </Match>
+              </Switch>
             )}
           </For>
         </Match>

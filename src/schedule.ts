@@ -42,6 +42,41 @@ async function fetchNewSchedule() {
     return node.festMatchSetting != null;
   });
 
+  newSchedule.data.coopGroupingSchedule.combinedSchedules = {
+    nodes: []
+  };
+
+  newSchedule.data.coopGroupingSchedule.combinedSchedules.nodes = [
+    ...newSchedule.data.coopGroupingSchedule.regularSchedules.nodes,
+    ...newSchedule.data.coopGroupingSchedule.teamContestSchedules.nodes
+  ];
+
+  newSchedule.data.coopGroupingSchedule.combinedSchedules.nodes.sort((a: any, b: any) => {
+    const startTimeA = Date.parse(a.startTime);
+    const startTimeB = Date.parse(b.startTime);
+    const endTimeA = Date.parse(a.endTime);
+    const endTimeB = Date.parse(b.endTime);
+
+    const happeningNowA = startTimeA <= Date.now() && endTimeA >= Date.now();
+    const happeningNowB = startTimeB <= Date.now() && endTimeB >= Date.now();
+
+    const ruleA = a.setting.rule;
+    const ruleB = b.setting.rule;
+
+    if (happeningNowA && happeningNowB) {
+      if (ruleA == undefined && ruleB != undefined) {
+        return 1;
+      }
+      if (ruleA != undefined && ruleB == undefined) {
+        return -1;
+      }
+
+      return 0;
+    } else {
+      return startTimeA - startTimeB;
+    }
+  });
+
   localStorage.setItem("schedule", JSON.stringify(newSchedule));
   return newSchedule;
 }
