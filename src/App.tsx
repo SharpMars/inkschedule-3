@@ -38,7 +38,7 @@ function App() {
     ) {
       setTab("Fest");
     }
-  }, getSchedule);
+  });
 
   return (
     <ErrorBoundary
