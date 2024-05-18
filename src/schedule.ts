@@ -39,7 +39,7 @@ async function fetchNewSchedule() {
   });
 
   newSchedule.data.festSchedules.nodes = newSchedule.data.festSchedules.nodes.filter((node: any) => {
-    return node.festMatchSetting != null;
+    return node.festMatchSettings != null;
   });
 
   newSchedule.data.coopGroupingSchedule.combinedSchedules = {
