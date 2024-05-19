@@ -100,6 +100,15 @@ fn main() {
                 .unwrap();
             Ok(())
         })
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .build(tauri::generate_context!())
+        .expect("error while building tauri application")
+        .run(|_app_handle, event| match event {
+            tauri::RunEvent::Updater(event) => match event {
+                tauri::UpdaterEvent::Updated => {
+                    _ = _app_handle.emit_all("reset", {});
+                }
+                _ => (),
+            },
+            _ => (),
+        });
 }
