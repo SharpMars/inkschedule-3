@@ -15,7 +15,9 @@ fn main() {
         .add_native_item(tauri::SystemTrayMenuItem::Separator)
         .add_item(autostart_item)
         .add_item(quit_item);
-    let system_tray = SystemTray::new().with_menu(system_tray_menu);
+    let system_tray = SystemTray::new()
+        .with_menu(system_tray_menu)
+        .with_tooltip("InkSchedule 3");
 
     tauri::Builder::default()
         .plugin(tauri_plugin_positioner::init())
