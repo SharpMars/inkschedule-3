@@ -1,4 +1,4 @@
-import { ErrorBoundary, Suspense, createEffect, createResource, createSignal } from "solid-js";
+import { ErrorBoundary, Suspense, createEffect, createResource, createSignal, on } from "solid-js";
 import { Navbar, Tab } from "./Navbar";
 import { getCurrentSchedule } from "./schedule";
 import { EntryList } from "./entries/EntryList";
@@ -23,22 +23,24 @@ function App() {
     }
   }, 3000);
 
-  createEffect(() => {
-    if (getTab() == "Challenges" && getSchedule()?.data.eventSchedules.nodes.length == 0) {
-      setTab("Regular");
-    }
+  createEffect(
+    on(getSchedule, (schedule) => {
+      if (getTab() == "Challenges" && schedule?.data.eventSchedules.nodes.length == 0) {
+        setTab("Regular");
+      }
 
-    if (getTab() == "Fest" && getSchedule()?.data.festSchedules.nodes.length == 0) {
-      setTab("Regular");
-    }
+      if (getTab() == "Fest" && schedule?.data.festSchedules.nodes.length == 0) {
+        setTab("Regular");
+      }
 
-    if (
-      ["Regular", "Anarchy", "X"].some((element) => element == getTab()) &&
-      getSchedule()?.data.regularSchedules.nodes.length == 0
-    ) {
-      setTab("Fest");
-    }
-  });
+      if (
+        ["Regular", "Anarchy", "X"].some((element) => element == getTab()) &&
+        schedule?.data.regularSchedules.nodes.length == 0
+      ) {
+        setTab("Fest");
+      }
+    })
+  );
 
   return (
     <ErrorBoundary
