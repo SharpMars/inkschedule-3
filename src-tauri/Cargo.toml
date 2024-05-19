@@ -1,6 +1,6 @@
 [package]
 name = "inkschedule-3"
-version = "0.4.1"
+version = "0.4.2"
 authors = ["SharpMars"]
 license = "MIT"
 repository = "https://github.com/SharpMars/inkschedule-3"
