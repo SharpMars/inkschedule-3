@@ -1,6 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayMenu};
+use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayMenu, SystemTraySubmenu};
 use tauri_plugin_autostart::ManagerExt;
 use tauri_plugin_positioner::{Position, WindowExt};
 
@@ -9,10 +9,21 @@ fn main() {
     let github_item = CustomMenuItem::new("github".to_string(), "GitHub");
     let autostart_item = CustomMenuItem::new("autostart".to_string(), "Launch on startup");
     let quit_item = CustomMenuItem::new("quit".to_string(), "Quit");
+
+    let tab_default = CustomMenuItem::new("tab_default", "Default");
+    let tab_salmon = CustomMenuItem::new("tab_salmon", "Salmon Run");
+
+    let default_tab_submenu = SystemTrayMenu::new()
+        .add_item(tab_default)
+        .add_item(tab_salmon);
+
+    let default_tab_item = SystemTraySubmenu::new("Default tab", default_tab_submenu);
+
     let system_tray_menu = SystemTrayMenu::new()
         .add_item(version_item)
         .add_item(github_item)
         .add_native_item(tauri::SystemTrayMenuItem::Separator)
+        .add_submenu(default_tab_item)
         .add_item(autostart_item)
         .add_item(quit_item);
     let system_tray = SystemTray::new()
@@ -76,6 +87,30 @@ fn main() {
                         }
                     }
 
+                    if id == "tab_default" {
+                        app.tray_handle()
+                            .get_item("tab_default")
+                            .set_selected(true)
+                            .unwrap();
+                        app.tray_handle()
+                            .get_item("tab_salmon")
+                            .set_selected(false)
+                            .unwrap();
+                        app.emit_all("set_tab", 0).unwrap();
+                    }
+
+                    if id == "tab_salmon" {
+                        app.tray_handle()
+                            .get_item("tab_salmon")
+                            .set_selected(true)
+                            .unwrap();
+                        app.tray_handle()
+                            .get_item("tab_default")
+                            .set_selected(false)
+                            .unwrap();
+                        app.emit_all("set_tab", 1).unwrap();
+                    }
+
                     if id == "quit" {
                         app.exit(0);
                     }
@@ -100,6 +135,43 @@ fn main() {
                 .get_item("version")
                 .set_title("Version: ".to_owned() + &app.config().package.version.clone().unwrap())
                 .unwrap();
+
+            let app_handle = app.app_handle();
+
+            app.listen_global("send_tab", move |event| {
+                if let Some(payload) = event.payload() {
+                    if let Ok(tab_id) = payload.parse::<u8>() {
+                        match tab_id {
+                            0 => {
+                                app_handle
+                                    .tray_handle()
+                                    .get_item("tab_default")
+                                    .set_selected(true)
+                                    .unwrap();
+                                app_handle
+                                    .tray_handle()
+                                    .get_item("tab_salmon")
+                                    .set_selected(false)
+                                    .unwrap();
+                            }
+                            1 => {
+                                app_handle
+                                    .tray_handle()
+                                    .get_item("tab_salmon")
+                                    .set_selected(true)
+                                    .unwrap();
+                                app_handle
+                                    .tray_handle()
+                                    .get_item("tab_default")
+                                    .set_selected(false)
+                                    .unwrap();
+                            }
+                            _ => (),
+                        }
+                    }
+                }
+            });
+
             Ok(())
         })
         .build(tauri::generate_context!())

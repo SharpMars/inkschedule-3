@@ -4,7 +4,9 @@ import { getCurrentSchedule } from "./schedule";
 import { EntryList } from "./entries/EntryList";
 
 function App() {
-  const [getTab, setTab] = createSignal<Tab>("Regular");
+  const [getTab, setTab] = createSignal<Tab>(
+    parseInt(localStorage.getItem("default_tab") ?? "0") == 0 ? "Regular" : "Salmon"
+  );
 
   const [getSchedule, { refetch }] = createResource(getCurrentSchedule);
 
