@@ -35,8 +35,8 @@ function App() {
 
       if (
         ["Regular", "Anarchy", "X"].some((element) => element == getTab()) &&
-        Date.parse(schedule?.data.currentFest.startTime) < Date.now() &&
-        Date.parse(schedule?.data.currentFest.endTime) > Date.now()
+        Date.parse(schedule?.data.currentFest?.startTime) < Date.now() &&
+        Date.parse(schedule?.data.currentFest?.endTime) > Date.now()
       ) {
         setTab("Fest");
       }
