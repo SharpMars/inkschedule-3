@@ -161,6 +161,7 @@ export function EntryList(props: EntryListProps) {
                       name: node.setting.coopStage.name,
                       thumbnail: node.setting.coopStage.thumbnailImage.url
                     }}
+                    kingSalmonid={node.setting.boss.name}
                     weapon1={{
                       name: node.setting.weapons[0].name,
                       image: node.setting.weapons[0].image.url

@@ -6,6 +6,7 @@ interface BigRunEntryProps {
   startTime: Date;
   endTime: Date;
   stage: Stage;
+  kingSalmonid: string;
   weapon1: Weapon;
   weapon2: Weapon;
   weapon3: Weapon;
@@ -27,6 +28,9 @@ export function BigRunEntry(props: BigRunEntryProps) {
             <img class="aspect-video rounded max-w-100%" src={props.stage.thumbnail} alt={props.stage.name} />
             <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
               {props.stage.name}
+            </p>
+            <p class="absolute m-0 top-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 whitespace-nowrap font-bold left-0 rounded-lb-0 rounded-rt-0">
+              {props.kingSalmonid}
             </p>
           </div>
           <div class="grid grid-cols-2 flex-1 relative bg-black rounded bg-opacity-20">
