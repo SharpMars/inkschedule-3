@@ -8,6 +8,7 @@ import { ChallengeEntry } from "./ChallengeEntry";
 import { FestEntry } from "./FestEntry";
 import { TriColorEntry } from "./TriColorEntry";
 import { EggstraEntry } from "./EggstraEntry";
+import { BigRunEntry } from "./BigRunEntry";
 
 interface EntryListProps {
   getTab: Accessor<Tab>;
@@ -126,7 +127,7 @@ export function EntryList(props: EntryListProps) {
                   />
                 }
               >
-                <Match when={node.setting.rule != undefined}>
+                <Match when={node.isEggstra}>
                   <EggstraEntry
                     startTime={new Date(Date.parse(node.startTime))}
                     endTime={new Date(Date.parse(node.endTime))}
@@ -151,6 +152,32 @@ export function EntryList(props: EntryListProps) {
                       image: node.setting.weapons[3].image.url
                     }}
                   ></EggstraEntry>
+                </Match>
+                <Match when={node.isBigRun}>
+                  <BigRunEntry
+                    startTime={new Date(Date.parse(node.startTime))}
+                    endTime={new Date(Date.parse(node.endTime))}
+                    stage={{
+                      name: node.setting.coopStage.name,
+                      thumbnail: node.setting.coopStage.thumbnailImage.url
+                    }}
+                    weapon1={{
+                      name: node.setting.weapons[0].name,
+                      image: node.setting.weapons[0].image.url
+                    }}
+                    weapon2={{
+                      name: node.setting.weapons[1].name,
+                      image: node.setting.weapons[1].image.url
+                    }}
+                    weapon3={{
+                      name: node.setting.weapons[2].name,
+                      image: node.setting.weapons[2].image.url
+                    }}
+                    weapon4={{
+                      name: node.setting.weapons[3].name,
+                      image: node.setting.weapons[3].image.url
+                    }}
+                  ></BigRunEntry>
                 </Match>
               </Switch>
             )}

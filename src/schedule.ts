@@ -48,7 +48,18 @@ async function fetchNewSchedule() {
 
   newSchedule.data.coopGroupingSchedule.combinedSchedules.nodes = [
     ...newSchedule.data.coopGroupingSchedule.regularSchedules.nodes,
-    ...newSchedule.data.coopGroupingSchedule.teamContestSchedules.nodes
+    ...newSchedule.data.coopGroupingSchedule.bigRunSchedules.nodes.map((node: any) => {
+      return {
+        ...node,
+        isBigRun: true
+      };
+    }),
+    ...newSchedule.data.coopGroupingSchedule.teamContestSchedules.nodes.map((node: any) => {
+      return {
+        ...node,
+        isEggstra: true
+      };
+    })
   ];
 
   newSchedule.data.coopGroupingSchedule.combinedSchedules.nodes.sort((a: any, b: any) => {
@@ -60,14 +71,14 @@ async function fetchNewSchedule() {
     const happeningNowA = startTimeA <= Date.now() && endTimeA >= Date.now();
     const happeningNowB = startTimeB <= Date.now() && endTimeB >= Date.now();
 
-    const ruleA = a.setting.rule;
-    const ruleB = b.setting.rule;
+    const isEggstraA = a.isEggstra;
+    const isEggstraB = b.isEggstra;
 
     if (happeningNowA && happeningNowB) {
-      if (ruleA == undefined && ruleB != undefined) {
+      if (!isEggstraA && isEggstraB) {
         return 1;
       }
-      if (ruleA != undefined && ruleB == undefined) {
+      if (isEggstraA && !isEggstraB) {
         return -1;
       }
 
