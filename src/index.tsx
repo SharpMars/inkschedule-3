@@ -11,8 +11,8 @@ listen("reset", () => {
   location.reload();
 });
 
-let defaultTabItem = localStorage.getItem("default_tab");
-let defaultTab = defaultTabItem ? parseInt(defaultTabItem) : 0;
+const defaultTabItem = localStorage.getItem("default_tab");
+const defaultTab = defaultTabItem ? parseInt(defaultTabItem) : 0;
 
 localStorage.setItem("default_tab", defaultTab.toString());
 

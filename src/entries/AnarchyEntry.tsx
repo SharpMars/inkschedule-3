@@ -17,17 +17,14 @@ interface Match {
 }
 
 export function AnarchyEntry(props: AnarchyEntryProps) {
-  let seriesModeImg = getImgFromMode(props.seriesMatch.mode);
-  let openModeImg = getImgFromMode(props.openMatch.mode);
-
   return (
     <Show when={props.endTime.getTime() >= Date.now()}>
       <div class="m-t-1 m-b-1">
-        <TimeLabel startTime={props.startTime} endTime={props.endTime}></TimeLabel>
+        <TimeLabel startTime={props.startTime} endTime={props.endTime} />
         <div class="bg-neutral-7 rounded m-t-1 flex gap-1 p-2 flex-col">
           <div class="flex justify-center gap-1">
             <div class="relative flex items-center">
-              <img src={seriesModeImg} class="aspect-square max-w-100%" />
+              <img src={getImgFromMode(props.seriesMatch.mode)} class="aspect-square max-w-100%" />
               <p class="absolute rounded-50% bg-violet-6 m-0 h-24px w-24px text-center font-bold bottom-3 right-1">S</p>
             </div>
             <div class="relative flex-1">
@@ -53,7 +50,7 @@ export function AnarchyEntry(props: AnarchyEntryProps) {
           </div>
           <div class="flex justify-center gap-1">
             <div class="relative flex items-center">
-              <img src={openModeImg} class="aspect-square max-w-100%" />
+              <img src={getImgFromMode(props.openMatch.mode)} class="aspect-square max-w-100%" />
               <p class="absolute rounded-50% bg-violet-6 m-0 h-24px w-24px text-center font-bold bottom-3 right-1">O</p>
             </div>
             <div class="relative flex-1">

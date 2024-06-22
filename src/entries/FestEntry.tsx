@@ -18,7 +18,7 @@ export function FestEntry(props: FestEntryProps) {
   return (
     <Show when={props.endTime.getTime() >= Date.now()}>
       <div class="m-t-1 m-b-1">
-        <TimeLabel startTime={props.startTime} endTime={props.endTime}></TimeLabel>
+        <TimeLabel startTime={props.startTime} endTime={props.endTime} />
         <div class="bg-neutral-7 rounded m-t-1 flex gap-1 p-2 flex-col">
           <div class="flex justify-center gap-1">
             <div class="relative flex-1">

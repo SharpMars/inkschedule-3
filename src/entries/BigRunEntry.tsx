@@ -22,7 +22,7 @@ export function BigRunEntry(props: BigRunEntryProps) {
   return (
     <Show when={props.endTime.getTime() >= Date.now()}>
       <div class="m-t-1 m-b-1">
-        <TimeLabel startTime={props.startTime} endTime={props.endTime} withDate={true}></TimeLabel>
+        <TimeLabel startTime={props.startTime} endTime={props.endTime} withDate={true} />
         <div class="bg-fuchsia-8 rounded m-t-1 flex gap-2 p-2 justify-center">
           <div class="relative flex-1 grow-2">
             <img class="aspect-video rounded max-w-100%" src={props.stage.thumbnail} alt={props.stage.name} />

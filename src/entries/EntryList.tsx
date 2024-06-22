@@ -151,7 +151,7 @@ export function EntryList(props: EntryListProps) {
                       name: node.setting.weapons[3].name,
                       image: node.setting.weapons[3].image.url
                     }}
-                  ></EggstraEntry>
+                  />
                 </Match>
                 <Match when={node.isBigRun}>
                   <BigRunEntry
@@ -178,7 +178,7 @@ export function EntryList(props: EntryListProps) {
                       name: node.setting.weapons[3].name,
                       image: node.setting.weapons[3].image.url
                     }}
-                  ></BigRunEntry>
+                  />
                 </Match>
               </Switch>
             )}

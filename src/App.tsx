@@ -17,7 +17,7 @@ function App() {
       return;
     }
 
-    let expireTime = new Date(Date.parse(schedule.expires));
+    const expireTime = new Date(Date.parse(schedule.expires));
     //i think im refetching too soon
     expireTime.setSeconds(2);
     if (expireTime <= new Date(Date.now())) {
@@ -53,16 +53,16 @@ function App() {
           <p class="p-2 bg-dark-1 rounded m-l-2 m-r-2 font-mono text-sm">{err.toString()}</p>
           <button
             class="p-3 font-bold text-size-4 color-white bg-neutral-500 b-0 rounded hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
-            onclick={() => location.reload()}
+            onClick={() => location.reload()}
           >
             Refresh
           </button>
         </div>
       )}
     >
-      <Navbar setTab={setTab} getSchedule={getSchedule}></Navbar>
+      <Navbar setTab={setTab} getSchedule={getSchedule} />
       <Suspense fallback={<p class="text-center font-bold h-[calc(100vh-46px)]">Loading...</p>}>
-        <EntryList getTab={getTab} getSchedule={getSchedule}></EntryList>
+        <EntryList getTab={getTab} getSchedule={getSchedule} />
       </Suspense>
     </ErrorBoundary>
   );

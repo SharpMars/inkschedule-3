@@ -17,10 +17,11 @@ export async function getCurrentSchedule() {
 }
 
 async function fetchNewSchedule() {
-  let res = await (await fetch("https://splatoon3.ink/data/schedules.json")).json();
-  let date = new Date(Date.now());
+  const res = await (await fetch("https://splatoon3.ink/data/schedules.json")).json();
+  const date = new Date(Date.now());
   date.setHours(date.getHours() + 1);
   date.setMinutes(0, 0, 0);
+  // eslint-disable-next-line prefer-const
   let newSchedule = {
     expires: date,
     data: res.data

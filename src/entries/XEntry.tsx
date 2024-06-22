@@ -12,15 +12,13 @@ interface XEntryProps {
 }
 
 export function XEntry(props: XEntryProps) {
-  let modeImg = getImgFromMode(props.mode);
-
   return (
     <Show when={props.endTime.getTime() >= Date.now()}>
       <div class="m-t-1 m-b-1">
-        <TimeLabel startTime={props.startTime} endTime={props.endTime}></TimeLabel>
+        <TimeLabel startTime={props.startTime} endTime={props.endTime} />
         <div class="bg-neutral-7 rounded m-t-1 flex gap-1 p-2 justify-center">
           <div class="flex items-center">
-            <img src={modeImg} class="aspect-square max-w-100%" />
+            <img src={getImgFromMode(props.mode)} class="aspect-square max-w-100%" />
           </div>
           <div class="relative flex-1">
             <img class="aspect-video rounded max-w-100%" src={props.stage1.thumbnail} alt={props.stage1.name} />

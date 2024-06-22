@@ -8,7 +8,8 @@ interface TriColorEntryProps {
 }
 
 export function TriColorEntry(props: TriColorEntryProps) {
-  const [countdown, { refetch }] = createResource(props.startTime, (src) => {
+  const startTime = () => props.startTime;
+  const [countdown, { refetch }] = createResource(startTime, (src) => {
     const distance = new Date(src).getTime() - Date.now();
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));

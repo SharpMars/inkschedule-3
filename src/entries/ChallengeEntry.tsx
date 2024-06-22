@@ -12,7 +12,8 @@ interface ChallengeEntryProps {
 }
 
 export function ChallengeEntry(props: ChallengeEntryProps) {
-  const [countdown, { refetch }] = createResource(props.timePeriods, (src) => {
+  const timePeriods = () => props.timePeriods;
+  const [countdown, { refetch }] = createResource(timePeriods, (src) => {
     return src.map((timePeriod) => {
       const distance = new Date(timePeriod.startTime).getTime() - Date.now();
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -26,15 +27,15 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
     refetch();
   }, 6000);
 
-  const titleSize = (22 / props.name.length) * 180;
+  const titleSize = () => (22 / props.name.length) * 180;
 
   return (
     <div class="bg-neutral-7 rounded m-t-1 m-b-1 p-2">
       <div class="flex gap-1">
-        <img class="aspect-square w-12" src={getImgFromMode(props.mode)}></img>
+        <img class="aspect-square w-12" src={getImgFromMode(props.mode)} />
         <span
           class="font-bold shadow-black text-shadow-[2px_2px_var(--un-shadow-color)] text-nowrap self-center"
-          style={{ "font-size": `min(175%, ${titleSize}%)` }}
+          style={{ "font-size": `min(175%, ${titleSize()}%)` }}
         >
           {props.name}
         </span>
