@@ -14,10 +14,15 @@
     "solid-js": "^1.8.16"
   },
   "devDependencies": {
+    "@eslint/js": "^9.5.0",
     "@tauri-apps/cli": "^1.5.11",
     "@types/node": "^20.12.7",
+    "eslint": "^9.5.0",
+    "eslint-plugin-solid": "^0.14.1",
+    "globals": "^15.6.0",
     "prettier": "3.2.4",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.1",
     "unocss": "^0.59.4",
     "vite": "^5.2.10",
     "vite-plugin-solid": "^2.10.2"
