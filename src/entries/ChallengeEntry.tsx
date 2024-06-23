@@ -1,6 +1,7 @@
-import { For, Match, Switch, createResource } from "solid-js";
+import { For, Match, Switch, createMemo } from "solid-js";
 import { Stage } from "./stage";
 import { Mode, getImgFromMode } from "./modes";
+import { createCountdownFromNow } from "@solid-primitives/date";
 
 interface ChallengeEntryProps {
   name: string;
@@ -13,19 +14,13 @@ interface ChallengeEntryProps {
 
 export function ChallengeEntry(props: ChallengeEntryProps) {
   const timePeriods = () => props.timePeriods;
-  const [countdown, { refetch }] = createResource(timePeriods, (src) => {
-    return src.map((timePeriod) => {
-      const distance = new Date(timePeriod.startTime).getTime() - Date.now();
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      return `in ${days}d ${hours}h ${minutes}m`;
+  const countdowns = createMemo(() => {
+    return timePeriods().map(({ startTime }) => {
+      //i think adding one minute to the countdown is good idea
+      //will prevent having 0 minutes before the time hits
+      return createCountdownFromNow(new Date(startTime).getTime() + 60000, 6000)[0];
     });
   });
-
-  setInterval(() => {
-    refetch();
-  }, 6000);
 
   const titleSize = () => (22 / props.name.length) * 180;
 
@@ -80,7 +75,7 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
               <span class="text-center grow-1 font-size-3 self-center font-bold bg-neutral-1 rounded color-black">
                 <Switch fallback="OVER">
                   <Match when={new Date(props.timePeriods[i()].startTime).getTime() > Date.now()}>
-                    {(countdown() as string[])[i()]}
+                    {`in ${countdowns()[i()].days}d ${countdowns()[i()].hours}h ${countdowns()[i()].minutes}m`}
                   </Match>
                   <Match
                     when={

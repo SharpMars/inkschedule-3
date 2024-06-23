@@ -1,5 +1,6 @@
-import { Match, Switch, createResource } from "solid-js";
+import { Match, Switch } from "solid-js";
 import { Stage } from "./stage";
+import { createCountdownFromNow } from "@solid-primitives/date";
 
 interface TriColorEntryProps {
   startTime: string;
@@ -9,16 +10,10 @@ interface TriColorEntryProps {
 
 export function TriColorEntry(props: TriColorEntryProps) {
   const startTime = () => props.startTime;
-  const [countdown, { refetch }] = createResource(startTime, (src) => {
-    const distance = new Date(src).getTime() - Date.now();
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    return `Open in ${hours}h ${minutes}m`;
-  });
 
-  setInterval(() => {
-    refetch();
-  }, 6000);
+  //i think adding one minute to the countdown is good idea
+  //will prevent having 0 minutes before the time hits
+  const [countdown] = createCountdownFromNow(new Date(startTime()).getTime() + 60000, 6000);
 
   return (
     <div class="bg-neutral-7 rounded m-t-1 m-b-1 p-2">
@@ -30,7 +25,9 @@ export function TriColorEntry(props: TriColorEntryProps) {
         <div class="flex flex-row relative">
           <span class="text-center grow-1 font-size-3.5 self-center font-800 bg-yellow-3 rounded color-black max-h-6">
             <Switch fallback="OVER">
-              <Match when={new Date(props.startTime).getTime() > Date.now()}>{countdown()}</Match>
+              <Match
+                when={new Date(props.startTime).getTime() > Date.now()}
+              >{`Open in ${countdown.hours}h ${countdown.minutes}m`}</Match>
               <Match
                 when={
                   new Date(props.startTime).getTime() <= Date.now() && new Date(props.endTime).getTime() >= Date.now()

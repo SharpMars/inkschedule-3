@@ -2,6 +2,7 @@ import { ErrorBoundary, Suspense, createEffect, createResource, createSignal, on
 import { Navbar, Tab } from "./Navbar";
 import { getCurrentSchedule } from "./schedule";
 import { EntryList } from "./entries/EntryList";
+import { makeTimer } from "@solid-primitives/timer";
 
 function App() {
   const [getTab, setTab] = createSignal<Tab>(
@@ -10,20 +11,24 @@ function App() {
 
   const [getSchedule, { refetch }] = createResource(getCurrentSchedule);
 
-  setInterval(() => {
-    const schedule = getSchedule();
+  makeTimer(
+    () => {
+      const schedule = getSchedule();
 
-    if (schedule == undefined) {
-      return;
-    }
+      if (schedule == undefined) {
+        return;
+      }
 
-    const expireTime = new Date(Date.parse(schedule.expires));
-    //i think im refetching too soon
-    expireTime.setSeconds(2);
-    if (expireTime <= new Date(Date.now())) {
-      refetch();
-    }
-  }, 3000);
+      const expireTime = new Date(Date.parse(schedule.expires));
+      //i think im refetching too soon
+      expireTime.setSeconds(2);
+      if (expireTime <= new Date(Date.now())) {
+        refetch();
+      }
+    },
+    3000,
+    setInterval
+  );
 
   createEffect(
     on(getSchedule, (schedule) => {
