@@ -1,4 +1,4 @@
-import { Match, Switch } from "solid-js";
+import { Match, Show, Switch } from "solid-js";
 import { Stage } from "./stage";
 import { createCountdownFromNow } from "@solid-primitives/date";
 
@@ -6,6 +6,7 @@ interface TriColorEntryProps {
   startTime: string;
   endTime: string;
   stage: Stage;
+  nextStage?: Stage;
 }
 
 export function TriColorEntry(props: TriColorEntryProps) {
@@ -40,9 +41,30 @@ export function TriColorEntry(props: TriColorEntryProps) {
         </div>
         <div class="relative">
           <img class="aspect-video w-100% rounded" src={props.stage.thumbnail} alt={props.stage.name} />
-          <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
-            {props.stage.name}
-          </p>
+          <Show when={props.nextStage != undefined}>
+            <div class="absolute w-40% right-0 bottom-2.5%">
+              <img
+                class="absolute bottom-0 left-0 aspect-video w-100% border-rd-[0.25rem_0_0.25rem_0] drop-shadow drop-shadow-color-dark"
+                src={props.nextStage?.thumbnail}
+                alt={props.nextStage?.name}
+              />
+              <p class="absolute m-0 font-size-3 right-0 bottom-0 bg-neutral-9 color-white p-l-1 p-r-1 whitespace-nowrap font-bold border-rd-[0.25rem_0_0.25rem_0]">
+                Next up
+              </p>
+            </div>
+          </Show>
+          <Show
+            when={props.nextStage != undefined}
+            fallback={
+              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+                {props.stage.name}
+              </p>
+            }
+          >
+            <p class="absolute m-0 font-size-3 top-0 left-0 bg-neutral-9 color-white p-l-1 p-r-1 whitespace-nowrap font-bold border-rd-[0.25rem_0_0.25rem_0]">
+              {props.stage.name}
+            </p>
+          </Show>
         </div>
       </div>
     </div>

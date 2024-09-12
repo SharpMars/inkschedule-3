@@ -89,6 +89,21 @@ async function fetchNewSchedule() {
     }
   });
 
+  const currentTriColorMatch = newSchedule.data.currentFest.timetable.find(
+    (match: { startTime: string; endTime: string }) =>
+      new Date(match.startTime).getTime() >= new Date().getTime() &&
+      new Date().getTime() < new Date(match.endTime).getTime()
+  );
+
+  const nextTriColorMatch =
+    newSchedule.data.currentFest.timetable[
+      (newSchedule.data.currentFest.timetable as any[]).indexOf(currentTriColorMatch) + 1
+    ];
+
+  newSchedule.data.currentFest.tricolorStage = currentTriColorMatch.festMatchSettings[0].vsStages[0];
+
+  newSchedule.data.currentFest.nextTricolorStage = nextTriColorMatch?.festMatchSettings[0].vsStages[0];
+
   localStorage.setItem("schedule", JSON.stringify(newSchedule));
   return newSchedule;
 }

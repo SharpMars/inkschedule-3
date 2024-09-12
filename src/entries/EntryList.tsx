@@ -213,6 +213,14 @@ export function EntryList(props: EntryListProps) {
                 name: props.getSchedule()?.data.currentFest.tricolorStage.name,
                 thumbnail: props.getSchedule()?.data.currentFest.tricolorStage.image.url
               }}
+              nextStage={
+                props.getSchedule()?.data.currentFest.nextTricolorStage == undefined
+                  ? undefined
+                  : {
+                      name: props.getSchedule()?.data.currentFest.nextTricolorStage.name,
+                      thumbnail: props.getSchedule()?.data.currentFest.nextTricolorStage.image.url
+                    }
+              }
             />
             <For each={props.getSchedule()?.data.festSchedules.nodes}>
               {(node) => (
