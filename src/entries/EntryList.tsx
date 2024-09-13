@@ -207,20 +207,13 @@ export function EntryList(props: EntryListProps) {
         <Match when={props.getTab() === "Fest"}>
           <Show when={props.getSchedule()?.data.currentFest !== null}>
             <TriColorEntry
-              startTime={props.getSchedule()?.data.currentFest.midtermTime}
-              endTime={props.getSchedule()?.data.currentFest.endTime}
+              startTime={props.getSchedule()?.data.currentFest.currentTricolorMatch.startTime}
+              endTime={props.getSchedule()?.data.currentFest.currentTricolorMatch.endTime}
               stage={{
                 name: props.getSchedule()?.data.currentFest.tricolorStages[0].name,
                 thumbnail: props.getSchedule()?.data.currentFest.tricolorStages[0].image.url
               }}
-              nextStage={
-                props.getSchedule()?.data.currentFest.nextTricolorStage == undefined
-                  ? undefined
-                  : {
-                      name: props.getSchedule()?.data.currentFest.nextTricolorStage.name,
-                      thumbnail: props.getSchedule()?.data.currentFest.nextTricolorStage.image.url
-                    }
-              }
+              nextMatch={props.getSchedule()?.data.currentFest.nextTricolorMatch}
             />
             <For each={props.getSchedule()?.data.festSchedules.nodes}>
               {(node) => (

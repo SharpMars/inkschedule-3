@@ -89,18 +89,22 @@ async function fetchNewSchedule() {
     }
   });
 
-  const currentTriColorMatch = newSchedule.data.currentFest.tricolorStages[0];
+  const currentTriColorStage = newSchedule.data.currentFest.tricolorStages[0];
+  const currentTriColorMatch = newSchedule.data.currentFest.timetable.find(
+    (match: { festMatchSettings: any[] }) => match.festMatchSettings[0].vsStages[0].id === currentTriColorStage.id
+  );
 
   const nextTriColorMatch =
     newSchedule.data.currentFest.timetable[
       (newSchedule.data.currentFest.timetable as any[]).indexOf(
         newSchedule.data.currentFest.timetable.find(
-          (match: { festMatchSettings: any[] }) => match.festMatchSettings[0].vsStages[0].id === currentTriColorMatch.id
+          (match: { festMatchSettings: any[] }) => match.festMatchSettings[0].vsStages[0].id === currentTriColorStage.id
         )
       ) + 1
     ];
 
-  newSchedule.data.currentFest.nextTricolorStage = nextTriColorMatch?.festMatchSettings[0].vsStages[0];
+  newSchedule.data.currentFest.currentTricolorMatch = currentTriColorMatch;
+  newSchedule.data.currentFest.nextTricolorMatch = nextTriColorMatch;
 
   localStorage.setItem("schedule", JSON.stringify(newSchedule));
   return newSchedule;
