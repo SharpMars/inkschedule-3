@@ -210,8 +210,8 @@ export function EntryList(props: EntryListProps) {
               startTime={props.getSchedule()?.data.currentFest.midtermTime}
               endTime={props.getSchedule()?.data.currentFest.endTime}
               stage={{
-                name: props.getSchedule()?.data.currentFest.tricolorStage.name,
-                thumbnail: props.getSchedule()?.data.currentFest.tricolorStage.image.url
+                name: props.getSchedule()?.data.currentFest.tricolorStages[0].name,
+                thumbnail: props.getSchedule()?.data.currentFest.tricolorStages[0].image.url
               }}
               nextStage={
                 props.getSchedule()?.data.currentFest.nextTricolorStage == undefined
