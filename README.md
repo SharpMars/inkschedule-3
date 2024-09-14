@@ -35,4 +35,6 @@ pnpm tauri build
 
 Before committing make sure your code is formatted.
 
-
+## Attributions
+- [Inkipedia](https://splatoonwiki.org/wiki/Main_Page) - Source of most icons used in the app
+- [splatoon3.ink](https://splatoon3.ink/) - Source of data displayed in the app
