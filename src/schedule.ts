@@ -89,47 +89,49 @@ async function fetchNewSchedule() {
     }
   });
 
-  if (newSchedule.data.currentFest.timetable.length == 0) {
-    newSchedule.data.currentFest.currentTricolorMatch = newSchedule.data.currentFest.tricolorStages[0];
-  } else {
-    let stageId;
-    let startTime;
-    const triColorTimetable = [];
+  if (newSchedule.data.currentFest !== null) {
+    if (newSchedule.data.currentFest.timetable.length == 0) {
+      newSchedule.data.currentFest.currentTricolorMatch = newSchedule.data.currentFest.tricolorStages[0];
+    } else {
+      let stageId;
+      let startTime;
+      const triColorTimetable = [];
 
-    for (const match of newSchedule.data.currentFest.timetable) {
-      if (stageId == undefined) stageId = match.festMatchSettings[0].vsStages[0].id;
+      for (const match of newSchedule.data.currentFest.timetable) {
+        if (stageId == undefined) stageId = match.festMatchSettings[0].vsStages[0].id;
 
-      if (startTime == undefined) startTime = match.startTime;
+        if (startTime == undefined) startTime = match.startTime;
 
-      if (
-        match.festMatchSettings[0].vsStages[0].id != stageId ||
-        newSchedule.data.currentFest.timetable.at(-1) === match
-      ) {
-        triColorTimetable.push({ ...match, startTime: startTime, endTime: match.endTime });
-        startTime = undefined;
-        stageId = undefined;
+        if (
+          match.festMatchSettings[0].vsStages[0].id != stageId ||
+          newSchedule.data.currentFest.timetable.at(-1) === match
+        ) {
+          triColorTimetable.push({ ...match, startTime: startTime, endTime: match.endTime });
+          startTime = undefined;
+          stageId = undefined;
+        }
       }
+
+      newSchedule.data.currentFest.timetable = triColorTimetable;
+
+      const currentTriColorStage = newSchedule.data.currentFest.tricolorStages[0];
+      const currentTriColorMatch = newSchedule.data.currentFest.timetable.find(
+        (match: { festMatchSettings: any[] }) => match.festMatchSettings[0].vsStages[0].id === currentTriColorStage.id
+      );
+
+      const nextTriColorMatch =
+        newSchedule.data.currentFest.timetable[
+          (newSchedule.data.currentFest.timetable as any[]).indexOf(
+            newSchedule.data.currentFest.timetable.find(
+              (match: { festMatchSettings: any[] }) =>
+                match.festMatchSettings[0].vsStages[0].id === currentTriColorStage.id
+            )
+          ) + 1
+        ];
+
+      newSchedule.data.currentFest.currentTricolorMatch = currentTriColorMatch;
+      newSchedule.data.currentFest.nextTricolorMatch = nextTriColorMatch;
     }
-
-    newSchedule.data.currentFest.timetable = triColorTimetable;
-
-    const currentTriColorStage = newSchedule.data.currentFest.tricolorStages[0];
-    const currentTriColorMatch = newSchedule.data.currentFest.timetable.find(
-      (match: { festMatchSettings: any[] }) => match.festMatchSettings[0].vsStages[0].id === currentTriColorStage.id
-    );
-
-    const nextTriColorMatch =
-      newSchedule.data.currentFest.timetable[
-        (newSchedule.data.currentFest.timetable as any[]).indexOf(
-          newSchedule.data.currentFest.timetable.find(
-            (match: { festMatchSettings: any[] }) =>
-              match.festMatchSettings[0].vsStages[0].id === currentTriColorStage.id
-          )
-        ) + 1
-      ];
-
-    newSchedule.data.currentFest.currentTricolorMatch = currentTriColorMatch;
-    newSchedule.data.currentFest.nextTricolorMatch = nextTriColorMatch;
   }
 
   localStorage.setItem("schedule", JSON.stringify(newSchedule));
