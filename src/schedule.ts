@@ -91,7 +91,11 @@ async function fetchNewSchedule() {
 
   if (newSchedule.data.currentFest !== null) {
     if (newSchedule.data.currentFest.timetable === null || newSchedule.data.currentFest.timetable.length == 0) {
-      newSchedule.data.currentFest.currentTricolorMatch = newSchedule.data.currentFest.tricolorStages[0];
+      newSchedule.data.currentFest.currentTricolorMatch = {
+        ...newSchedule.data.currentFest.tricolorStages[0],
+        startTime: newSchedule.data.currentFest.midtermTime,
+        endTime: newSchedule.data.currentFest.endTime
+      };
     } else {
       let stageId;
       let startTime;
