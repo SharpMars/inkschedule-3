@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "InkSchedule 3",
-    "version": "0.7.4"
+    "version": "0.7.5"
   },
   "tauri": {
     "allowlist": {
@@ -42,7 +42,7 @@
         "decorations": false,
         "visible": false,
         "transparent": true,
-        "userAgent": "SharpMars-InkSchedule3/0.7.4"
+        "userAgent": "SharpMars-InkSchedule3/0.7.5"
       }
     ],
     "systemTray": {
