@@ -1,8 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use ::windows::Win32::Graphics::Gdi::{GetMonitorInfoW, MonitorFromWindow, MONITORINFO};
+use std::{mem, ptr};
 use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayMenu, SystemTraySubmenu};
 use tauri_plugin_autostart::ManagerExt;
 use tauri_plugin_positioner::{Position, WindowExt};
+use windows::Win32::Graphics::Gdi::MONITOR_DEFAULTTOPRIMARY;
 
 fn main() {
     let version_item = CustomMenuItem::new("version".to_string(), "").disabled();
@@ -46,9 +49,12 @@ fn main() {
                     let mut position = window.outer_position().unwrap();
 
                     let window_width: i32 = window.outer_size().unwrap().width.try_into().unwrap();
+                    let window_height: i32 =
+                        window.outer_size().unwrap().height.try_into().unwrap();
 
                     let top_right_pos = position.x + window_width;
-                    let monitor_size_width: i32 = window
+                    let bottom_left_pos = position.y + window_height;
+                    let mut monitor_size_width: i32 = window
                         .current_monitor()
                         .unwrap()
                         .unwrap()
@@ -57,9 +63,56 @@ fn main() {
                         .try_into()
                         .unwrap();
 
+                    let mut monitor_size_height: i32 = window
+                        .current_monitor()
+                        .unwrap()
+                        .unwrap()
+                        .size()
+                        .height
+                        .try_into()
+                        .unwrap();
+
+                    let mut left_offset: i32 = 0;
+                    let mut top_offset: i32 = 0;
+
+                    unsafe {
+                        let hwnd = window.hwnd().unwrap();
+
+                        let hmonitor =
+                            MonitorFromWindow(mem::transmute(hwnd), MONITOR_DEFAULTTOPRIMARY);
+
+                        let mut lpmi = mem::zeroed::<MONITORINFO>();
+                        lpmi.cbSize = size_of::<MONITORINFO>() as u32;
+
+                        let result = GetMonitorInfoW(hmonitor, ptr::from_mut(&mut lpmi));
+
+                        if result.as_bool() {
+                            monitor_size_width = lpmi.rcWork.right;
+                            monitor_size_height = lpmi.rcWork.bottom;
+                            left_offset = lpmi.rcWork.left;
+                            top_offset = lpmi.rcWork.top;
+                        }
+                    }
+
                     if top_right_pos > monitor_size_width {
                         let pos_offset = top_right_pos - monitor_size_width;
                         position.x = position.x - pos_offset;
+                        window.set_position(position).unwrap();
+                    }
+
+                    if left_offset > 0 {
+                        position.x = left_offset;
+                        window.set_position(position).unwrap();
+                    }
+
+                    if bottom_left_pos > monitor_size_height {
+                        let pos_offset = bottom_left_pos - monitor_size_height;
+                        position.y = position.y - pos_offset;
+                        window.set_position(position).unwrap();
+                    }
+
+                    if top_offset > 0 {
+                        position.y = top_offset;
                         window.set_position(position).unwrap();
                     }
 
