@@ -3,6 +3,7 @@ import { Navbar, Tab } from "./Navbar";
 import { getCurrentSchedule } from "./schedule";
 import { EntryList } from "./entries/EntryList";
 import { makeTimer } from "@solid-primitives/timer";
+import { Loading } from "./Loading";
 
 function App() {
   const [getTab, setTab] = createSignal<Tab>(
@@ -51,12 +52,10 @@ function App() {
   );
 
   return (
-    <>
-      <Navbar setTab={setTab} getSchedule={getSchedule} />
-      <Suspense fallback={<p class="text-center font-bold h-[calc(100vh-46px)]">Loading...</p>}>
-        <EntryList getTab={getTab} getSchedule={getSchedule} />
-      </Suspense>
-    </>
+    <Suspense fallback={<Loading></Loading>}>
+      <Navbar getTab={getTab} setTab={setTab} getSchedule={getSchedule} />
+      <EntryList getTab={getTab} getSchedule={getSchedule} />
+    </Suspense>
   );
 }
 

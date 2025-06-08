@@ -5,6 +5,7 @@ import "virtual:uno.css";
 import "./styles.css";
 import App from "./App";
 import { emit, listen } from "@tauri-apps/api/event";
+import { onMount } from "solid-js";
 
 listen("reset", () => {
   localStorage.clear();
@@ -28,18 +29,24 @@ render(() => <WrappedApp />, document.getElementById("root") as HTMLElement);
 function WrappedApp() {
   return (
     <ErrorBoundary
-      fallback={(err) => (
-        <div class="flex flex-col items-center overflow-y-auto overflow-x-hidden h-600px">
-          <h2>Error has occured</h2>
-          <p class="p-2 bg-dark-1 rounded m-l-2 m-r-2 font-mono text-sm">{err.toString()}</p>
-          <button
-            class="p-3 font-bold text-size-4 color-white bg-neutral-500 b-0 rounded hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
-            onClick={() => location.reload()}
-          >
-            Refresh
-          </button>
-        </div>
-      )}
+      fallback={(err) => {
+        onMount(() => {
+          throw err;
+        });
+
+        return (
+          <div class="flex flex-col items-center overflow-y-auto overflow-x-hidden h-600px">
+            <h2>Error has occured</h2>
+            <p class="p-2 bg-dark-1 rounded m-l-2 m-r-2 font-mono text-sm">{err.toString()}</p>
+            <button
+              class="p-3 font-bold text-size-4 color-white bg-neutral-500 b-0 rounded hover:filter-brightness-90% active:filter-brightness-70% transition-filter"
+              onClick={() => location.reload()}
+            >
+              Refresh
+            </button>
+          </div>
+        );
+      }}
     >
       <App />
     </ErrorBoundary>

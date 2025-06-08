@@ -23,24 +23,24 @@ export function FestEntry(props: FestEntryProps) {
           <div class="flex justify-center gap-1">
             <div class="relative flex-1">
               <img
-                class="aspect-video rounded max-w-100%"
+                class="aspect-video rounded-l max-w-100%"
                 src={props.openMatch.stage1.thumbnail}
                 alt={props.openMatch.stage1.name}
               />
               <p class="absolute m-0 top-0 left-0 font-size-3 bg-neutral-9 color-white rounded rounded-lb-0 rounded-rt-0 p-l-1 p-r-1 whitespace-nowrap font-bold">
                 Open
               </p>
-              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
                 {props.openMatch.stage1.name}
               </p>
             </div>
             <div class="relative flex-1">
               <img
-                class="aspect-video rounded flex-1 max-w-100%"
+                class="aspect-video rounded-r flex-1 max-w-100%"
                 src={props.openMatch.stage2.thumbnail}
                 alt={props.openMatch.stage2.name}
               />
-              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
                 {props.openMatch.stage2.name}
               </p>
             </div>
@@ -48,24 +48,24 @@ export function FestEntry(props: FestEntryProps) {
           <div class="flex justify-center gap-1">
             <div class="relative flex-1">
               <img
-                class="aspect-video rounded max-w-100%"
+                class="aspect-video rounded-l max-w-100%"
                 src={props.proMatch.stage1.thumbnail}
                 alt={props.proMatch.stage1.name}
               />
               <p class="absolute m-0 top-0 left-0 font-size-3 bg-neutral-9 color-white rounded rounded-lb-0 rounded-rt-0 p-l-1 p-r-1 whitespace-nowrap font-bold">
                 Pro
               </p>
-              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
                 {props.proMatch.stage1.name}
               </p>
             </div>
             <div class="relative flex-1">
               <img
-                class="aspect-video rounded flex-1 max-w-100%"
+                class="aspect-video rounded-r flex-1 max-w-100%"
                 src={props.proMatch.stage2.thumbnail}
                 alt={props.proMatch.stage2.name}
               />
-              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
                 {props.proMatch.stage2.name}
               </p>
             </div>

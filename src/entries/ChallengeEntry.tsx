@@ -38,14 +38,14 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
       <p class="whitespace-pre m-t-2 font-light">{props.description}</p>
       <div class="grid grid-cols-2 gap-1 m-b-2">
         <div class="relative">
-          <img class="aspect-video w-100% rounded" src={props.stage1.thumbnail} alt={props.stage1.name} />
-          <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+          <img class="aspect-video w-100% rounded-l" src={props.stage1.thumbnail} alt={props.stage1.name} />
+          <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
             {props.stage1.name}
           </p>
         </div>
         <div class="relative">
-          <img class="aspect-video w-100% rounded" src={props.stage2.thumbnail} alt={props.stage2.name} />
-          <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+          <img class="aspect-video w-100% rounded-r" src={props.stage2.thumbnail} alt={props.stage2.name} />
+          <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
             {props.stage2.name}
           </p>
         </div>
@@ -72,7 +72,13 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
                     minute: "2-digit"
                   })}
               </p>
-              <span class="text-center grow-1 font-size-3 self-center font-bold bg-neutral-1 rounded color-black">
+              <span
+                class="text-center grow-1 font-size-3 self-center font-bold bg-neutral-1 rounded color-black"
+                style={{
+                  "mask-image": "url('time_mask.svg')",
+                  "mask-size": "cover"
+                }}
+              >
                 <Switch fallback="OVER">
                   <Match when={new Date(props.timePeriods[i()].startTime).getTime() > Date.now()}>
                     {`in ${countdowns()[i()].days}d ${countdowns()[i()].hours}h ${countdowns()[i()].minutes}m`}
@@ -88,7 +94,7 @@ export function ChallengeEntry(props: ChallengeEntryProps) {
                 </Switch>
               </span>
               {new Date(props.timePeriods[i()].endTime).getTime() < Date.now() && (
-                <hr class="absolute w-95% h-0 m-auto bottom-0 border-2px border-pink-6 border-solid rounded top-0 left-2.5%" />
+                <hr class="absolute w-93% h-0 m-auto bottom-0 border-2px border-pink-6 border-solid rounded top-0 left-2.5%" />
               )}
             </div>
             {i() !== props.timePeriods.length - 1 && <hr class="border-dashed border-neutral-4" />}

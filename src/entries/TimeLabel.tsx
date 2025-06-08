@@ -26,7 +26,13 @@ export function TimeLabel(props: TimeLabelProps) {
   };
 
   return (
-    <p class="bg-yellow-3 font-bold text-black rounded text-center w-fit p-l-2 p-r-2 m-0">
+    <p
+      class="bg-yellow-3 font-bold text-black rounded text-center w-fit p-l-2 p-r-2 m-0"
+      style={{
+        "mask-image": "url('time_mask.svg')",
+        "mask-size": "cover"
+      }}
+    >
       {startTimeStr()}-{endTimeStr()}
     </p>
   );

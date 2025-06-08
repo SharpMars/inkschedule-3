@@ -19,13 +19,19 @@ export function TriColorEntry(props: TriColorEntryProps) {
 
   return (
     <div class="bg-neutral-7 rounded m-t-1 m-b-1 p-2">
-      <div class="flex flex-col gap-1 m-b-2 relative">
+      <div class="flex flex-col gap-1 relative">
         <img
           src="/Tricolor.png"
-          class="aspect-square w-25% position-absolute z-1 left--3 bottom--5 filter-drop-shadow filter-drop-shadow-color-[#00000080]"
+          class="aspect-square w-25% position-absolute z-1 right--1 bottom--5 filter-drop-shadow filter-drop-shadow-color-[#00000080]"
         />
         <div class="flex flex-row relative">
-          <span class="text-center grow-1 font-size-3.5 self-center font-800 bg-yellow-3 rounded color-black max-h-6">
+          <span
+            class="text-center grow-1 font-size-3.5 self-center font-800 bg-yellow-3 rounded color-black max-h-6"
+            style={{
+              "mask-image": "url('tricolor_state_mask.svg')",
+              "mask-size": "cover"
+            }}
+          >
             <Switch fallback="OVER">
               <Match
                 when={new Date(props.startTime).getTime() > Date.now()}
@@ -59,12 +65,12 @@ export function TriColorEntry(props: TriColorEntryProps) {
           <Show
             when={props.nextMatch != undefined}
             fallback={
-              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+              <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
                 {props.stage.name}
               </p>
             }
           >
-            <p class="absolute m-0 font-size-3 top-0 left-0 bg-neutral-9 color-white p-l-1 p-r-1 whitespace-nowrap font-bold border-rd-[0.25rem_0_0.25rem_0]">
+            <p class="absolute m-0 font-size-3 top-0 left-0 bg-neutral-9 color-white p-l-1 p-r-1 whitespace-nowrap font-bold border-rd-[0.25rem_0_0.25rem_0] line-height-relaxed">
               {props.stage.name}
             </p>
           </Show>

@@ -18,7 +18,7 @@ interface EntryListProps {
 export function EntryList(props: EntryListProps) {
   return (
     //height calculated from max height minus navbar height and few pixels for bottom margin
-    <div class="overflow-y-scroll flex flex-col h-[calc(100vh-46px)] p-l-1 p-r-1 m-t-2 m-l-.5 m-r-.5 m-b-1">
+    <div class="overflow-y-scroll flex flex-col h-[calc(100vh-88px)] p-l-1 p-r-1 m-t-2 m-l-.5 m-r-.5 m-b-1">
       <Switch>
         <Match when={props.getTab() === "Regular"}>
           <For each={props.getSchedule()?.data.regularSchedules.nodes}>

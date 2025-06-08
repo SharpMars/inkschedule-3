@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "Viga";
+  src:
+    url("Viga-Regular.ttf");
+}
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Viga, Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -19,10 +25,23 @@
   -webkit-user-select: none;
 }
 
+#top {
+  height: 35px;
+  mask-image: url('top_mask.svg');
+  mask-mode: luminance;
+  mask-position: center;
+  background-color: #212121;
+  width: 450px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  filter: drop-shadow(0 16px 0 #FFF);
+}
+
 #root {
-  border-radius: 0.25rem;
   overflow: hidden;
   background-color: #212121;
+  width: 450px;
+  height: 600px;
 }
 
 body {

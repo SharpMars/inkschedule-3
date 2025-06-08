@@ -25,7 +25,7 @@ export function EggstraEntry(props: EggstraEntryProps) {
         <div class="bg-yellow-7 rounded m-t-1 flex gap-2 p-2 justify-center">
           <div class="relative flex-1 grow-2">
             <img class="aspect-video rounded max-w-100%" src={props.stage.thumbnail} alt={props.stage.name} />
-            <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold">
+            <p class="absolute m-0 bottom-0 font-size-3 bg-neutral-9 color-white rounded p-l-1 p-r-1 left-1/2 -translate-x-1/2 whitespace-nowrap font-bold line-height-relaxed">
               {props.stage.name}
             </p>
           </div>
