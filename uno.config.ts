@@ -5,7 +5,7 @@ export default defineConfig({
   theme: {
     animation: {
       keyframes: {
-        swim: "{0%,100% {transform:scaleX(1.1) scaleY(0.95); background-image: url('squid.svg');} 50% {transform:scaleX(.5) scaleY(1.05); background-image: url('squid-2.svg');}}"
+        swim: "{0%,100% {transform:scaleX(1.1) scaleY(0.95); background-image: url('/squid.svg');} 50% {transform:scaleX(.5) scaleY(1.05); background-image: url('/squid-2.svg');}}"
       },
       durations: {
         swim: "800ms"

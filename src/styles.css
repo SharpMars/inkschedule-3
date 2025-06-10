@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Viga";
   src:
-    url("Viga-Regular.ttf");
+    url("/Viga-Regular.ttf");
 }
 
 :root {
@@ -27,7 +27,7 @@
 
 #top {
   height: 35px;
-  mask-image: url('top_mask.svg');
+  mask-image: url('/top_mask.svg');
   mask-mode: luminance;
   mask-position: center;
   background-color: #212121;
