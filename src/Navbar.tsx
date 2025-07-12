@@ -14,7 +14,7 @@ export function Navbar(props: NavbarProps) {
       {props.getSchedule()?.data.festSchedules.nodes.length > 0 && (
         <button
           aria-label="Splatfest"
-          class="bg-transparent b-0 flex-1 hover:filter-brightness-90% active:filter-brightness-70% active:scale-90 transition-all p-0.5 relative max-w-24 group"
+          class="bg-transparent b-0 flex-1 hover:filter-brightness-90% active:filter-brightness-70% active:scale-95 transition-all relative max-w-24 group p-0.5"
           classList={{ active: props.getTab() == "Fest" }}
           onClick={() => {
             props.setTab("Fest");
@@ -24,7 +24,7 @@ export function Navbar(props: NavbarProps) {
             class="bg-neutral-7 w-full h-full absolute left-0 top-0"
             style={{
               "mask-image": "url('button_mask.svg')",
-              "mask-size": "contain"
+              "mask-size": "cover"
             }}
           ></div>
           <div
